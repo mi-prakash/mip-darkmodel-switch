@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="administrator" method="upgrade">
+	<name>MIP Darkmode Switch</name>
+	<author>Mahmudul Islam Prakash</author>
+	<creationDate>2024-02-15</creationDate>
+	<copyright>(C) 2024 Mahmudul Islam Prakash</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>prakash.a7x@gmail.com</authorEmail>
+	<authorUrl>https://github.com/mi-prakash</authorUrl>
+	<version>1.0.0</version>
+	<description>A Simple module for Dark Mode On/Off switch. Publish the module on position "status"</description>
+	<files>
+		<filename module="mod_mip_darkmode_switch">mod_mip_darkmode_switch.php</filename>
+		<folder>tmpl</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/mod_mip_darkmode_switch.ini</language>
+		<language tag="en-GB">language/en-GB/mod_mip_darkmode_switch.sys.ini</language>
+	</languages>
+</extension>
