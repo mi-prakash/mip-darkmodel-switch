@@ -12,4 +12,3 @@ You can use the .zip file to install in as an Extension
 
 Author: Mahmudul Islam Prakash
 Email: prakash.a7x@gmail.com
-Reference: https://it-networks.de/dev-blog/tutorial-joomla-5-dark-mode-switcher-modul-erstellen-backend
