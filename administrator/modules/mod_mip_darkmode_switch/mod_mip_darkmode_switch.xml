@@ -13,8 +13,4 @@
 		<filename module="mod_mip_darkmode_switch">mod_mip_darkmode_switch.php</filename>
 		<folder>tmpl</folder>
 	</files>
-	<languages>
-		<language tag="en-GB">language/en-GB/mod_mip_darkmode_switch.ini</language>
-		<language tag="en-GB">language/en-GB/mod_mip_darkmode_switch.sys.ini</language>
-	</languages>
 </extension>
