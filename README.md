@@ -7,9 +7,9 @@ Run the following commands
 
 2- "gulp"
 
-After the command 'gulp' a build .zip file will generate in the 'build' directory.
-You can use the .zip file to install
+After the command "gulp" a .zip file will generate in the 'build' directory.
+You can use the .zip file to install in as an Extension
 
-Copyright:
-	* (C) 2024 Mahmudul Islam Prakash
-	* Email: prakash.a7x@gmail.com
+Author: Mahmudul Islam Prakash
+Email: prakash.a7x@gmail.com
+Reference: https://it-networks.de/dev-blog/tutorial-joomla-5-dark-mode-switcher-modul-erstellen-backend
