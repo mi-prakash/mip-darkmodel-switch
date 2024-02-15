@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 ?>
 <button type="button" class="header-item-content dms-button" style="border: none;">
     <span class="header-item-icon">
-        <span style="margin: 3px; font-size: 1.2rem; transition: all .6s ease;">🌓</span>
+        <span style="margin: 3px; font-size: 1.2rem; transition: all .6s ease;"><i class="fa fa-sun"></i></span>
     </span>
     <span class="header-item-text">Dark Mode Switcher</span>
 </button>
@@ -37,12 +37,12 @@ defined('_JEXEC') or die;
       const icon = btn.querySelector(".header-item-icon > span");
       const text = btn.querySelector(".header-item-text");
       if (darkMode) {
-        icon.innerHTML = "🌙";
+        icon.innerHTML = '<i class="fa fa-moon"></i>';
         icon.style.backgroundColor = "rgb(31, 48, 71)";
         text.innerHTML = "&nbsp;Dark Mode";
       } else {
-        icon.innerHTML = "☀️";
-        icon.style.backgroundColor = "transparent";
+        icon.innerHTML = '<i class="fa fa-sun"></i>';
+        icon.style.backgroundColor = "&nbsp;Dark Mode";
         text.innerHTML = "Light Mode";
       }
     }
