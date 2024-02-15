@@ -1,4 +1,4 @@
-MIP Darkmode Switch for Joomla 5
+MIP Dark Mode Switch for Joomla 5
 ------------------------------------------------------------------------------------------------------
 
 Run the following commands
