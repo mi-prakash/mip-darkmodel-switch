@@ -6,88 +6,119 @@
  *
  * @copyright   (C) 2024 Mahmudul Islam Prakash <prakash.a7x@gmail.com>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- *
- * Reference    https://it-networks.de/dev-blog/tutorial-joomla-5-dark-mode-switcher-modul-erstellen-backend
  */
 
 defined('_JEXEC') or die;
 ?>
-<button type="button" class="header-item-content dms-button" style="border: none;">
+<!-- Dark Mode Toggle Button -->
+<button type="button" class="header-item-content dark-mode-toggle-button" style="border: none;">
     <span class="header-item-icon">
         <span style="margin: 3px; font-size: 1.2rem; transition: all .6s ease;"><i class="fa fa-sun"></i></span>
     </span>
     <span class="header-item-text"></span>
 </button>
 
+<!-- Dark Mode Toggle Script -->
 <script>
     Joomla = window.Joomla || {};
+
     ((Joomla, document) => {
         'use strict';
+
         // Run script only once
-        if (typeof window.jDarkMode !== "undefined") return;
-        
+        if (typeof window.joomlaDarkMode !== "undefined") return;
+
         // Initial settings
-        let darkMode = window.jDarkMode = (getDarkModeLocalStorage() === "true");
-        setDarkModeLocalStorage(darkMode);
+        let isDarkMode = window.joomlaDarkMode = (getDarkModeLocalStorage() === "true");
+
+        // Set initial state in local storage
+        setDarkModeLocalStorage(isDarkMode);
+
         // Update the first visible button to avoid flickering
-        updateButton(document.querySelector("button.dms-button"), darkMode);
-        updateMode(darkMode);
+        updateDarkModeToggleButton(document.querySelector("button.dark-mode-toggle-button"), isDarkMode);
 
-        function updateButton(btn, darkMode) {
-            const icon = btn.querySelector(".header-item-icon > span");
-            const text = btn.querySelector(".header-item-text");
-            if (darkMode) {
-            icon.innerHTML = '<i class="fa fa-moon"></i>';
-            icon.style.backgroundColor = "rgb(31, 48, 71)";
-            text.innerHTML = " Dark Mode";
+        // Apply dark mode settings
+        applyDarkMode(isDarkMode);
+
+        // Function to update the dark mode toggle button
+        function updateDarkModeToggleButton(button, isDarkMode) {
+            const icon = button.querySelector(".header-item-icon > span");
+            const text = button.querySelector(".header-item-text");
+
+            if (isDarkMode) {
+                setDarkModeIconAndText(icon, text, "fa-moon", "rgb(31, 48, 71)", " Dark Mode");
             } else {
-            icon.innerHTML = '<i class="fa fa-sun"></i>';
-            icon.style.backgroundColor = " Dark Mode";
-            text.innerHTML = "Light Mode";
+                setDarkModeIconAndText(icon, text, "fa-sun", "", "Light Mode");
             }
         }
 
-        function updateMode(darkMode) {
-            for (const sheet of document.styleSheets) {
-            for (let i = sheet.cssRules.length - 1; i >= 0; i--) {
-                let rule = sheet.cssRules[i].media;
-                if (typeof rule !== "undefined" && rule.mediaText.includes("prefers-color-scheme")) {
-                if (darkMode) {
-                    if (!rule.mediaText.includes("(prefers-color-scheme: light)")) rule.appendMedium("(prefers-color-scheme: light)");
-                    if (!rule.mediaText.includes("(prefers-color-scheme: dark)")) rule.appendMedium("(prefers-color-scheme: dark)");
-                    if (rule.mediaText.includes("original")) rule.deleteMedium("original-prefers-color-scheme");
-                } else {
-                    rule.appendMedium("original-prefers-color-scheme");
-                    if (rule.mediaText.includes("light")) rule.deleteMedium("(prefers-color-scheme: light)");
-                    if (rule.mediaText.includes("dark")) rule.deleteMedium("(prefers-color-scheme: dark)");
+        // Function to set dark mode icon and text
+        function setDarkModeIconAndText(icon, text, iconName, backgroundColor, buttonText) {
+            icon.innerHTML = `<i class="fa ${iconName}"></i>`;
+            icon.style.backgroundColor = backgroundColor;
+            text.innerHTML = buttonText;
+        }
+
+        // Function to apply dark mode settings
+        function applyDarkMode(isDarkMode) {
+            for (const styleSheet of document.styleSheets) {
+                for (let i = styleSheet.cssRules.length - 1; i >= 0; i--) {
+                    let rule = styleSheet.cssRules[i].media;
+
+                    if (typeof rule !== "undefined" && rule.mediaText.includes("prefers-color-scheme")) {
+                        if (isDarkMode) {
+                            updateMediaRuleForDarkMode(rule);
+                        } else {
+                            updateMediaRuleForLightMode(rule);
+                        }
+                    }
                 }
-                }
-            }
             }
         }
 
-        // Sets localStorage state
+        // Function to update media rule for dark mode
+        function updateMediaRuleForDarkMode(rule) {
+            if (!rule.mediaText.includes("(prefers-color-scheme: light)")) rule.appendMedium("(prefers-color-scheme: light)");
+            if (!rule.mediaText.includes("(prefers-color-scheme: dark)")) rule.appendMedium("(prefers-color-scheme: dark)");
+            if (rule.mediaText.includes("original")) rule.deleteMedium("original-prefers-color-scheme");
+        }
+
+        // Function to update media rule for light mode
+        function updateMediaRuleForLightMode(rule) {
+            rule.appendMedium("original-prefers-color-scheme");
+            if (rule.mediaText.includes("(prefers-color-scheme: light)")) rule.deleteMedium("(prefers-color-scheme: light)");
+            if (rule.mediaText.includes("(prefers-color-scheme: dark)")) rule.deleteMedium("(prefers-color-scheme: dark)");
+        }
+
+        // Set local storage state
         function setDarkModeLocalStorage(state) {
-            localStorage.setItem("jDarkMode", state);
+            localStorage.setItem("joomlaDarkMode", state);
         }
 
-        // Gets localStorage state
+        // Get local storage state
         function getDarkModeLocalStorage() {
-            return localStorage.getItem("jDarkMode");
+            return localStorage.getItem("joomlaDarkMode");
         }
 
-        // Update all "Dark Mode Switcher" buttons after DOMContentLoaded
+        // Update all "Dark Mode Toggle" buttons after DOMContentLoaded
         document.addEventListener('DOMContentLoaded', () => {
-            const dmsBtns = document.querySelectorAll("button.dms-button");
-            dmsBtns.forEach((dmsBtn) => {
-            updateButton(dmsBtn, darkMode);
-            // Set eventListeners for all "dark-mode"-toggle-buttons on click and set localStorage
-            dmsBtn.addEventListener("click", () => {
-                let darkMode = window.jDarkMode = (getDarkModeLocalStorage() === "false");
-                setDarkModeLocalStorage(darkMode);
-                dmsBtns.forEach((dmsBtn) => updateButton(dmsBtn, darkMode));
-                updateMode(darkMode);
-            });
+            const darkModeToggleButtons = document.querySelectorAll("button.dark-mode-toggle-button");
+
+            darkModeToggleButtons.forEach((button) => {
+                // Update button state
+                updateDarkModeToggleButton(button, isDarkMode);
+
+                // Set event listeners for all "dark-mode" toggle buttons on click and update local storage
+                button.addEventListener("click", () => {
+                    isDarkMode = window.joomlaDarkMode = !isDarkMode;
+                    setDarkModeLocalStorage(isDarkMode);
+
+                    // Update all dark mode toggle buttons
+                    darkModeToggleButtons.forEach((btn) => updateDarkModeToggleButton(btn, isDarkMode));
+
+                    // Update the CSS styles based on dark mode preference
+                    applyDarkMode(isDarkMode);
+                });
             });
         });
     })(Joomla, document);
