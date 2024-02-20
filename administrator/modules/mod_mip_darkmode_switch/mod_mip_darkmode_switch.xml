@@ -13,4 +13,9 @@
 		<filename module="mod_mip_darkmode_switch">mod_mip_darkmode_switch.php</filename>
 		<folder>tmpl</folder>
 	</files>
+	<updateservers>
+		<server type="extension" 
+		priority="1" 
+		name="MIP Darkmode Switch">https://github.com/mi-prakash/mip-darkmodel-switch</server>
+	</updateservers>
 </extension>
