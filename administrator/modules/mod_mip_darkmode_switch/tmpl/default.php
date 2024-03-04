@@ -6,6 +6,8 @@
  *
  * @copyright   (C) 2024 Mahmudul Islam Prakash <prakash.a7x@gmail.com>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * 
+ * Reference link https://it-networks.de/dev-blog/tutorial-joomla-5-dark-mode-switcher-modul-erstellen-backend
  */
 
 defined('_JEXEC') or die;
