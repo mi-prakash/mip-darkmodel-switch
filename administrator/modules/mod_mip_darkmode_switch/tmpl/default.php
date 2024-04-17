@@ -6,8 +6,6 @@
  *
  * @copyright   (C) 2024 Mahmudul Islam Prakash <prakash.a7x@gmail.com>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * 
- * Reference link https://it-networks.de/dev-blog/tutorial-joomla-5-dark-mode-switcher-modul-erstellen-backend
  */
 
 defined('_JEXEC') or die;
@@ -62,34 +60,24 @@ defined('_JEXEC') or die;
         }
 
         // Function to apply dark mode settings
-        function applyDarkMode(isDarkMode) {
-            for (const styleSheet of document.styleSheets) {
-                for (let i = styleSheet.cssRules.length - 1; i >= 0; i--) {
-                    let rule = styleSheet.cssRules[i].media;
-
-                    if (typeof rule !== "undefined" && rule.mediaText.includes("prefers-color-scheme")) {
-                        if (isDarkMode) {
-                            updateMediaRuleForDarkMode(rule);
-                        } else {
-                            updateMediaRuleForLightMode(rule);
-                        }
-                    }
-                }
+        function applyDarkMode(isDarkMode) { 
+            if (isDarkMode) {
+                updateMediaRuleForDarkMode();
+            } else {
+                updateMediaRuleForLightMode();
             }
         }
 
         // Function to update media rule for dark mode
-        function updateMediaRuleForDarkMode(rule) {
-            if (!rule.mediaText.includes("(prefers-color-scheme: light)")) rule.appendMedium("(prefers-color-scheme: light)");
-            if (!rule.mediaText.includes("(prefers-color-scheme: dark)")) rule.appendMedium("(prefers-color-scheme: dark)");
-            if (rule.mediaText.includes("original")) rule.deleteMedium("original-prefers-color-scheme");
+        function updateMediaRuleForDarkMode() {
+            $('html').attr('data-bs-theme', 'dark');
+            $('html').attr('data-color-scheme', 'dark');
         }
 
         // Function to update media rule for light mode
-        function updateMediaRuleForLightMode(rule) {
-            rule.appendMedium("original-prefers-color-scheme");
-            if (rule.mediaText.includes("(prefers-color-scheme: light)")) rule.deleteMedium("(prefers-color-scheme: light)");
-            if (rule.mediaText.includes("(prefers-color-scheme: dark)")) rule.deleteMedium("(prefers-color-scheme: dark)");
+        function updateMediaRuleForLightMode() {
+            $('html').attr('data-bs-theme', 'light');
+            $('html').attr('data-color-scheme', 'light');
         }
 
         // Set local storage state
