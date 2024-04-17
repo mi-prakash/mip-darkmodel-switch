@@ -159,5 +159,9 @@ defined('_JEXEC') or die;
                 });
             });
         });
+
+        $(document).ready(function() {
+            applyDarkMode(isDarkMode);
+        });
     })(Joomla, document);
 </script>
