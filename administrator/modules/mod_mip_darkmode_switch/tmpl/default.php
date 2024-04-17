@@ -89,7 +89,7 @@ defined('_JEXEC') or die;
         }
 
         // Function to update media rule for dark mode
-        function updateMediaRuleForDarkMode() {
+        function updateMediaRuleForDarkMode(rule) {
             if (isNewerVersion) {
                 $('html').attr('data-bs-theme', 'dark');
                 $('html').attr('data-color-scheme', 'dark');
@@ -101,7 +101,7 @@ defined('_JEXEC') or die;
         }
 
         // Function to update media rule for light mode
-        function updateMediaRuleForLightMode() {
+        function updateMediaRuleForLightMode(rule) {
             if (isNewerVersion) {
                 $('html').attr('data-bs-theme', 'light');
                 $('html').attr('data-color-scheme', 'light');
