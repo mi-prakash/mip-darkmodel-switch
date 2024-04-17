@@ -22,12 +22,12 @@ gulp.task("clean_build", function () {
 });
 
 gulp.task("clean_zip", function () {
-  return gulp.src("./mod_mip_darkmode_switch_v1.0.0.zip", { read: false, allowEmpty: true }).pipe(clean());
+  return gulp.src("./mod_mip_darkmode_switch_v1.1.0.zip", { read: false, allowEmpty: true }).pipe(clean());
 });
 
 gulp.task(
   "default",
   gulp.series("clean_zip", "clean_build", "copy", "zip_it", function () {
-    return gulp.src("./build/**/*.*").pipe(zip("mod_mip_darkmode_switch_v1.0.0.zip")).pipe(gulp.dest("./build"));
+    return gulp.src("./build/**/*.*").pipe(zip("mod_mip_darkmode_switch_v1.1.0.zip")).pipe(gulp.dest("./build"));
   }),
 );

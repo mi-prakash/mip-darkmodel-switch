@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>prakash.a7x@gmail.com</authorEmail>
 	<authorUrl>https://github.com/mi-prakash</authorUrl>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<description>A Simple module for Dark Mode On/Off switch. Publish the module on position "status"</description>
 	<files>
 		<filename module="mod_mip_darkmode_switch">mod_mip_darkmode_switch.php</filename>
